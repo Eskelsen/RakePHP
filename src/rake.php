@@ -23,7 +23,6 @@ function expect($value) {
                 throw new Exception($message);
             }
 
-            // reseta o not() após uso
             $this->negate = false;
 
             return $this;
@@ -34,12 +33,10 @@ function expect($value) {
             return $this;
         }
 
-        // ===== Igualdade =====
-
         public function toBe($expected) {
             return $this->check(
                 $this->value === $expected,
-                "Esperado ser idêntico a " . var_export($expected, true) .
+                "esperado ser idêntico a " . var_export($expected, true) .
                 ", recebido " . var_export($this->value, true)
             );
         }
@@ -47,91 +44,81 @@ function expect($value) {
         public function toEqual($expected) {
             return $this->check(
                 $this->value == $expected,
-                "Esperado ser igual a " . var_export($expected, true)
+                "esperado ser igual a " . var_export($expected, true)
             );
         }
 
-        // ===== Boolean / Null =====
-
         public function toBeTrue() {
-            return $this->check($this->value === true, "Esperado true");
+            return $this->check($this->value === true, 'esperado true, recebido ' . var_export($this->value, true));
         }
 
         public function toBeFalse() {
-            return $this->check($this->value === false, "Esperado false");
+            return $this->check($this->value === false, 'esperado false, recebido ' . var_export($this->value, true));
         }
 
         public function toBeNull() {
-            return $this->check($this->value === null, "Esperado null");
+            return $this->check($this->value === null, 'esperado null, recebido ' . var_export($this->value, true));
         }
 
         public function toBeEmpty() {
-            return $this->check(empty($this->value), "Esperado vazio");
+            return $this->check(empty($this->value), 'esperado vazio, recebido ' . var_export($this->value, true));
         }
-
-        // ===== Strings =====
 
         public function toContain($needle) {
             return $this->check(
                 is_string($this->value) && str_contains($this->value, $needle),
-                "Esperado conter '$needle'"
+                "esperado conter '$needle', recebido '{$this->value}'"
             );
         }
 
         public function toStartWith($prefix) {
             return $this->check(
                 is_string($this->value) && str_starts_with($this->value, $prefix),
-                "Esperado começar com '$prefix'"
+                "esperado começar com '$prefix', recebido '{$this->value}'"
             );
         }
 
         public function toEndWith($suffix) {
             return $this->check(
                 is_string($this->value) && str_ends_with($this->value, $suffix),
-                "Esperado terminar com '$suffix'"
+                "esperado terminar com '$suffix', recebido '{$this->value}'"
             );
         }
-
-        // ===== Arrays =====
 
         public function toHaveCount($count) {
             return $this->check(
                 is_countable($this->value) && count($this->value) === $count,
-                "Esperado ter $count itens"
+                "esperado ter $count itens"
             );
         }
 
         public function toHaveKey($key) {
             return $this->check(
                 is_array($this->value) && array_key_exists($key, $this->value),
-                "Esperado ter a chave '$key'"
+                "esperado ter a chave '$key'"
             );
         }
-
-        // ===== Comparações =====
 
         public function toBeGreaterThan($expected) {
             return $this->check(
                 $this->value > $expected,
-                "Esperado ser maior que $expected"
+                "esperado ser maior que '$expected', recebido '{$this->value}'"
             );
         }
 
         public function toBeLessThan($expected) {
             return $this->check(
                 $this->value < $expected,
-                "Esperado ser menor que $expected"
+                "esperado ser menor que '$expected', recebido '{$this->value}'"
             );
         }
 
         public function toBeBetween($min, $max) {
             return $this->check(
                 $this->value >= $min && $this->value <= $max,
-                "Esperado estar entre $min e $max"
+                "esperado estar entre $min e $max, recebido '{$this->value}'"
             );
         }
-
-        // ===== Exceções =====
 
         public function toThrow($exceptionClass = null) {
             if (!is_callable($this->value)) {
@@ -148,7 +135,7 @@ function expect($value) {
                 return $this->check(true, '');
             }
 
-            return $this->check(false, "Esperado lançar exceção");
+            return $this->check(false, "esperado lançar exceção");
         }
     };
 }

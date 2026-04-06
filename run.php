@@ -9,8 +9,8 @@ error_reporting(E_ALL);
 ini_set('log_errors', true);
 ini_set('error_log', __DIR__  . '/errors.log');
 
-require __DIR__ . '/retro-compatibility.php';
-require __DIR__ . '/functions.php';
+require __DIR__ . '/src/retro-compatibility.php';
+require __DIR__ . '/src/rake.php';
 
 foreach (glob(__DIR__ . '/tests/*.php') as $file) {
     require $file;
@@ -24,7 +24,7 @@ $failed = 0;
 foreach ($tests as [$desc, $fn]) {
     try {
         $fn();
-        echo "✅ $desc\n";
+        echo "✅ $desc" . PHP_EOL;
         $passed++;
     } catch (Throwable $e) {
         echo "❌ $desc: " . $e->getMessage() . PHP_EOL;
@@ -32,4 +32,4 @@ foreach ($tests as [$desc, $fn]) {
     }
 }
 
-echo PHP_EOL . "$passed passou, $failed falhou" . PHP_EOL;
+echo PHP_EOL . "✅ Ok: $passed\n❌ Erros: $failed" . PHP_EOL;
