@@ -1,5 +1,14 @@
 <?php
 
+# Dev Mode: Show Errors
+ini_set('display_errors', true);
+ini_set('display_startup_erros', true);
+error_reporting(E_ALL);
+
+# Erros Log Output
+ini_set('log_errors', true);
+ini_set('error_log', __DIR__  . '/errors.log');
+
 require __DIR__ . '/functions.php';
 
 foreach (glob(__DIR__ . '/tests/*.php') as $file) {
