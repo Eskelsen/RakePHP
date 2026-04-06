@@ -26,8 +26,7 @@ foreach ($tests as [$desc, $fn]) {
         echo "✅ $desc\n";
         $passed++;
     } catch (Throwable $e) {
-        echo "❌ $desc\n";
-        echo "   " . $e->getMessage() . PHP_EOL;
+        echo "❌ $desc: " . $e->getMessage() . PHP_EOL;
         $failed++;
     }
 }

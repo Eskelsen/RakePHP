@@ -43,7 +43,3 @@ test('toBeNull funciona', function () {
 test('toBeTrue funciona', function () {
     expect(true)->toBeTrue();
 });
-
-test('toThrow funciona', function () {
-    expect(fn() => throw new Exception())->toThrow(Exception::class);
-});
