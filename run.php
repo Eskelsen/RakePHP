@@ -9,6 +9,7 @@ error_reporting(E_ALL);
 ini_set('log_errors', true);
 ini_set('error_log', __DIR__  . '/errors.log');
 
+require __DIR__ . '/retro-compatibility.php';
 require __DIR__ . '/functions.php';
 
 foreach (glob(__DIR__ . '/tests/*.php') as $file) {
